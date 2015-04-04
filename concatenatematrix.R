@@ -24,12 +24,7 @@ expression_matrix = expression_matrix[complete.cases(expression_matrix),]
 
 
 }
-#-----------------------------------------------------Testing function for eliminating log transformed data
-for(i in 1:ncol(standard_matrix)){
-  q = qqnorm(standard_matrix[,i])
-  q.lm = lm(q$y~q$x)
-  if(q.lm$coefficients == 1.0) {
-    norm = standard_matrix[,i]
-  }
-  
-}
+#---------------------Still testing
+#This should in theory get rid of anything that is normalized. Anything with low expression is eliminated
+new_matrix = expression_matrix[,colMeans(expression_matrix)>50]
+
