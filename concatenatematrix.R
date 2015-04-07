@@ -28,10 +28,11 @@ expression_matrix = expression_matrix[complete.cases(expression_matrix),]
 #---------------------Still testing
 #Graham says that he takes the row means of the dataset and then takes the median of the average expression. 
 #If the median of the averages is less than 100 he throws the entire thing out.
-expression_matrix = cbind(expression_matrix,rowMeans(expression_matrix))
+gene_expression_means = rowMeans(expression_matrix)
 
-if(median(expression_matrix[,ncol(expression_matrix)]) < 100) {
+if(median(gene_expression_means) < 100) {
    rm(expression_matrix) }
 else{
-    return(expression_matrix[,-ncol(expression_matrix)]) }
+    return(expression_matrix)
+}
 }
