@@ -33,5 +33,5 @@ expression_matrix = cbind(expression_matrix,rowMeans(expression_matrix))
 if(median(expression_matrix[,ncol(expression_matrix)]) < 100) {
    rm(expression_matrix) }
 else{
-    return(expression_matrix) }
+    return(expression_matrix[,-ncol(expression_matrix)]) }
 }
