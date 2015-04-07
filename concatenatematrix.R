@@ -30,8 +30,8 @@ expression_matrix = expression_matrix[complete.cases(expression_matrix),]
 #If the median of the averages is less than 100 he throws the entire thing out.
 expression_matrix = cbind(expression_matrix,rowMeans(expression_matrix))
 
-if(median(mat[,ncol(mat)]) < 100) {
-   rm(mat) }
+if(median(expression_matrix[,ncol(expression_matrix)]) < 100) {
+   rm(expression_matrix) }
 else{
-    return mat}
+    return(expression_matrix) }
 }
