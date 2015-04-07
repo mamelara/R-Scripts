@@ -24,7 +24,7 @@ expression_matrix = expression_matrix[complete.cases(expression_matrix),]
 
 
 }
-#---------------------Still testing
-#This should in theory get rid of anything that is normalized. Anything with low expression is eliminated
-new_matrix = expression_matrix[,colMeans(expression_matrix)>50]
 
+#---------------------Still testing
+#Graham says that he takes the row means of the dataset and then takes the median of the average expression. 
+#If the median of the averages is less than 100 he throws the entire thing out.
