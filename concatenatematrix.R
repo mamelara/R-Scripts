@@ -10,32 +10,17 @@ myFiles = list.files(dirpath,pattern="*.txt",full.name=T)
 GEO_list = lapply(myFiles,function(x){
     getGEO(filename=as.character(x),GSEMatrix=TRUE)})
 
-#Create an empty matrix to start appending to?
+expression_list = lapply(GEO_list, exprs)
 
-#Then loop through the remaining entries of the list, first check the rowMeans of the entry. If it's less than 100 delete it.
-#Take row means of every dataset and then check the maximum value. Then you want to get rid of expressions < 200 of each row
-for(i in 1:length(GEO_list)) {
-  if(max(rowMeans(exprs(GEO_list[[i]]))) < 100){
-      GEO_list[[i]] = NULL
+for(x in seq_along(expression_list)){
+  if( is.na(median(rowMeans(expression_list[[x]]))) == TRUE ){
+   expression_list[[x]] = NULL
+   
   }
-  
+}
 
-
-#Get rid of NA's
-expression_matrix = expression_matrix[complete.cases(expression_matrix),]
-
-
-
-
-
-#---------------------Still testing
-#Graham says that he takes the row means of the dataset and then takes the median of the average expression. 
-#If the median of the averages is less than 100 he throws the entire thing out.
-gene_expression_means = rowMeans(expression_matrix)
-
-#if(median(gene_expression_means) < 100) {
-#   rm(expression_matrix) }
-#else{
-#    return(expression_matrix)
-#}
+#Some datasets give a median of NA. Need to get rid of those and anything less than 100. [[4]] and [[24]] are NA.
+for(x in seq_along(expression_list)){
+  print(median(rowMeans(expression_list[[x]])))
+}
 }
