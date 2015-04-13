@@ -19,12 +19,13 @@ for(x in length(expression_list):1){
   }
 }
 #Some datasets give a median of NA. Need to get rid of those and anything less than 100. [[4]] and [[24]] are NA.
+#Separate case for NA medians
 for(x in length(expression_list):1) {
   if( is.na(median(rowMeans(expression_list[[x]]))) == TRUE ){
     expression_list[[x]] = NULL
   }
 }
-
+#Separate case for median less than 100.
 for(x in length(expression_list):1){
   if( median(rowMeans(expression_list[[x]])) > 100)
   print(median(rowMeans(expression_list[[x]])))
