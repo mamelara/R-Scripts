@@ -11,16 +11,23 @@ GEO_list = lapply(myFiles,function(x){
     getGEO(filename=as.character(x),GSEMatrix=TRUE)})
 
 expression_list = lapply(GEO_list, exprs)
-
-for(x in seq_along(expression_list)){
-  if( is.na(median(rowMeans(expression_list[[x]]))) == TRUE ){
+#Try iterating backwards to keep the indexes the same so that they don't shift
+for(x in length(expression_list):1){
+  if( (is.na(median(rowMeans(expression_list[[x]]))) == TRUE) | ( median(rowMeans(expression_list[[x]])) < 100 ) ){
    expression_list[[x]] = NULL
    
   }
 }
-
 #Some datasets give a median of NA. Need to get rid of those and anything less than 100. [[4]] and [[24]] are NA.
-for(x in seq_along(expression_list)){
+for(x in length(expression_list):1) {
+  if( is.na(median(rowMeans(expression_list[[x]]))) == TRUE ){
+    expression_list[[x]] = NULL
+  }
+}
+
+for(x in length(expression_list):1){
+  if( median(rowMeans(expression_list[[x]])) > 100)
   print(median(rowMeans(expression_list[[x]])))
 }
+
 }
