@@ -20,7 +20,7 @@ for(x in length(expression_list):1){
 }
 expression_matrix = expression_list[[1]]
 for(i in 2:length(expression_list)) {
-  expression_matrix = combine(expression_matrix,expression_list[[2]])
+  expression_matrix = combine(expression_matrix,expression_list[[i]])
 }
 
 expression_matrix = expression_matrix[complete.cases(expression_matrix),]#Some datasets give a median of NA. Need to get rid of those and anything less than 100. [[4]] and [[24]] are NA
